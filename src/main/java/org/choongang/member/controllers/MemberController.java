@@ -18,16 +18,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
 
     private final MemberSaveService saveService;
+    private final JoniValidator joniValidator;
 
     @PostMapping
     public ResponseEntity join(@Valid @RequestBody RequestJoin form, Errors errors) {
 
-        if (errors.hasErrors()) {
-            throw new BadRequestException(errors);
-        }
+        joniValidator.validate(form, errors);
+
+        errorProcess(errors);
 
         saveService.join(form);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    private void errorProcess(Errors errors) {
+        if (errors.hasErrors()) {
+            throw new BadRequestException(errors);
+        }
     }
 }
