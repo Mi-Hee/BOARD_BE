@@ -12,7 +12,7 @@ import java.util.Arrays;
 @Configuration
 public class CorsFilterConfig {
 
-    @Value("${cors.origin}") // 의문 : ${cors.origin}
+    @Value("${cors.origin}")
     private String origin;
 
     @Bean
