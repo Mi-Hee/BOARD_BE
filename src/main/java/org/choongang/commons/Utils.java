@@ -17,11 +17,26 @@ public class Utils {
 
     private final MessageSource messageSource;
 
+
     public Map<String, List<String>> getErrorMessages(Errors errors) {
 
         Map<String, List<String>> messages = errors.getFieldErrors()
                 .stream()
                 .collect(Collectors.toMap(FieldError::getField, e -> _getErrorMessages(e.getCodes())));
+
+
+        List<String> gMessages = errors.getGlobalErrors()
+                .stream()
+                .map(o -> {
+                    try {
+                        String message = messageSource.getMessage(o.getCode(), null, null);
+                        return message;
+                    } catch (Exception e) {
+                        return "";
+                    }
+                }).filter(s -> !s.isBlank()).toList();
+
+        messages.put("global", gMessages);
 
         return messages;
     }
@@ -31,12 +46,11 @@ public class Utils {
                 .map(c -> {
                     try {
                         String message = messageSource.getMessage(c, null, null);
-
                         return message;
                     } catch (Exception e) {
                         return "";
                     }
-        })
+                })
                 .filter(s -> !s.isBlank()).toList();
 
         return messages;

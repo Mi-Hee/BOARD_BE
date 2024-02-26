@@ -22,7 +22,7 @@ public class MemberSaveService {
         Member member = Member.builder()
                 .email(form.getEmail())
                 .name(form.getName())
-                .password(form.getPassword())
+                .password(hash)
                 .authority(Authority.USER)
                 .lock(false)
                 .enable(true)
@@ -35,4 +35,5 @@ public class MemberSaveService {
 
         memberRepository.saveAndFlush(member);
     }
+
 }

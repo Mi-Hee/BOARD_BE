@@ -11,15 +11,14 @@ public class MemberUtil {
 
     private final HttpServletRequest request;
 
+
     /**
-     * Authorization : Bearer 토큰값
+     * Authorization: Bearer 토큰값
      * @return
      */
     public String getToken() {
         String authorization = request.getHeader("Authorization");
-
         if (StringUtils.hasText(authorization)) {
-
             return authorization.substring(7);
         }
 

@@ -4,19 +4,21 @@ import org.choongang.member.service.MemberInfo;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-public class AuditorAwareImpl implements AuditorAware {
+@Component
+public class AuditorAwareImpl implements AuditorAware<String> {
     @Override
-    public Optional getCurrentAuditor() {
+    public Optional<String> getCurrentAuditor() {
 
         String email = null;
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.getPrincipal() instanceof MemberInfo) {
-            MemberInfo memberInfo = (MemberInfo) authentication.getPrincipal();
+            MemberInfo memberInfo = (MemberInfo)authentication.getPrincipal();
             email = memberInfo.getEmail();
         }
 

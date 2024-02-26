@@ -8,12 +8,11 @@ import lombok.Data;
 
 @Data
 public class RequestJoin {
-
     @NotBlank @Email
     private String email;
 
     @NotBlank
-    @Size(min = 8)
+    @Size(min=8)
     private String password;
 
     @NotBlank

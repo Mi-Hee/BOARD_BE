@@ -49,7 +49,8 @@ public class JoinTest {
         Member member = repository.findByEmail(form.getEmail()).orElse(null);
         System.out.println(member);
     }
-    
+
+
     @Test
     @DisplayName("[통합테스트]회원가입 테스트")
     void joinApiTest() throws Exception {
