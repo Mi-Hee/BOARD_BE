@@ -47,5 +47,11 @@ public class FileInfo extends BaseMember {
     private String fileUrl;
 
     @Transient
+    private String thumbPath;
+
+    @Transient
+    private String thumbUrl;
+
+    @Transient
     private MultipartFile file;
 }

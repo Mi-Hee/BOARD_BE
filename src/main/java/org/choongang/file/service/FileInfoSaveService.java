@@ -38,7 +38,7 @@ public class FileInfoSaveService {
             String contentType = file.getContentType(); // image/jpef, image/png ...
 
             // 이미지만 업로드될 때 이미지가 아닌 파일은 건너뛰기
-            if (imageOnly && contentType.indexOf("image/") == - 1) {
+            if (imageOnly && contentType.indexOf("image/") == -1) {
                 continue;
             }
 
