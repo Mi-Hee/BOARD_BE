@@ -25,3 +25,8 @@ logging:
         type:
           descriptor:
             sql: trace
+
+file:
+  upload:
+    path: C:/uploads/
+    url: /uploads/
