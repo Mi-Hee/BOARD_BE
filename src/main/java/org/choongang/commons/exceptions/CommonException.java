@@ -7,6 +7,7 @@ public class CommonException extends RuntimeException {
 
     private HttpStatus status;
     private Errors errors;
+    private boolean messageCode;
 
     public CommonException(String message) {
         this(message, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -33,5 +34,13 @@ public class CommonException extends RuntimeException {
 
     public Errors getErrors() {
         return errors;
+    }
+
+    public void setMessageCode(boolean messageCode) {
+        this.messageCode = messageCode;
+    }
+
+    public boolean isMessageCode() {
+        return messageCode;
     }
 }

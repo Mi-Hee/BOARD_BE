@@ -33,3 +33,11 @@ jwt:
   header: Authorization
   secret: ${jwt.secret}
   accessTokenValidityInSeconds: 3600 # 60 min
+
+cors:
+  origin: ${cors.origin}
+
+file:
+  upload:
+    path: ${file.upload.path}
+    url: /uploads/
