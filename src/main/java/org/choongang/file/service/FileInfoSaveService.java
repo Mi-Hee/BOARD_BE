@@ -19,7 +19,6 @@ public class FileInfoSaveService {
     private final FileInfoRepository fileInfoRepository;
 
     public List<FileInfo> save(RequestFileUpload form) {
-
         List<FileInfo> items = new ArrayList<>();
         MultipartFile[] files = form.getFile();
 
@@ -35,9 +34,9 @@ public class FileInfoSaveService {
             // 파일명.확장자, 파일명.파일명.확장자 - lastIndexOf
             String fileName = file.getOriginalFilename();
             String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
-            String contentType = file.getContentType(); // image/jpef, image/png ...
+            String contentType = file.getContentType(); // image/jpeg, image/png ...
 
-            // 이미지만 업로드될 때 이미지가 아닌 파일은 건너뛰기
+            // 이미지만 업로드일때 이미지가 아닌 파일은 건너뛰기
             if (imageOnly && contentType.indexOf("image/") == -1) {
                 continue;
             }
@@ -53,6 +52,7 @@ public class FileInfoSaveService {
 
             items.add(item);
         }
+
 
         fileInfoRepository.saveAllAndFlush(items);
 

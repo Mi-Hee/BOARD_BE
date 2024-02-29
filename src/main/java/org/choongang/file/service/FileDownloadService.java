@@ -10,7 +10,6 @@ import java.io.*;
 @Service
 @RequiredArgsConstructor
 public class FileDownloadService {
-
     private final HttpServletResponse response;
     private final FileInfoService infoService;
 
@@ -27,25 +26,24 @@ public class FileDownloadService {
             throw new FileNotFoundException();
         }
 
-        // ServletOutputStream
+        // ServletOutputStream, PrintWriter
 
         try (FileInputStream fis = new FileInputStream(file);
-             BufferedInputStream bis = new BufferedInputStream(fis)) {
-             OutputStream out = response.getOutputStream();
+            BufferedInputStream bis = new BufferedInputStream(fis)) {
+            OutputStream out = response.getOutputStream();
 
-             response.setHeader("Content-Disposition", "attachment; filename = " + fileName);
-             response.setHeader("Contnet-Type", "application/octet-stream");
-             response.setIntHeader("Expires", 0);
-             response.setHeader("Cache-Control", "must-revalidate");
-             response.setHeader("Pragma", "public");
-             response.setHeader("Content-Length", String.valueOf(file.length()));
+            response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+            response.setHeader("Content-Type", "application/octet-stream");
+            response.setIntHeader("Expires", 0);
+            response.setHeader("Cache-Control", "must-revalidate");
+            response.setHeader("Pragma", "public");
+            response.setHeader("Content-Length", String.valueOf(file.length()));
 
-            while (bis.available() > 0) {
+            while(bis.available() > 0) {
                 out.write(bis.read());
             }
 
             out.flush();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

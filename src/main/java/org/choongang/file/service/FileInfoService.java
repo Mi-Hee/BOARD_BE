@@ -56,7 +56,7 @@ public class FileInfoService {
             builder.and(fileInfo.done.eq(mode.equals("DONE")));
         }
 
-        List<FileInfo> items = (List<FileInfo>) repository.findAll(builder, Sort.by(desc("createdAt")));
+        List<FileInfo> items = (List<FileInfo>)repository.findAll(builder, Sort.by(desc("createdAt")));
 
         items.forEach(this::addFileInfo);
 
@@ -90,7 +90,7 @@ public class FileInfoService {
         item.setFileUrl(fileUrl);
 
         String contentType = item.getContentType();
-        if (contentType.indexOf("image/") != -1) { // 업로드한 파일이 이미지인 경우만
+        if (contentType.indexOf("image/") != -1) { // 업로드한 파일이 이미지
             String thumbPath = thumbPath(seq) + "/main_" + fileName;
             String thumbUrl = thumbUrl(seq) + "/main_" + fileName;
 
@@ -102,7 +102,6 @@ public class FileInfoService {
     public String uploadDir(long seq) {
         String uploadDir = props.getPath() + (seq % 10L);
         File _uploadDir = new File(uploadDir);
-
         if (!_uploadDir.exists()) {
             _uploadDir.mkdir();
         }
@@ -111,9 +110,9 @@ public class FileInfoService {
     }
 
     public String uploadUrl(long seq) {
-
         // http, https
-        String host = String.format("%s://%s:%d", request.getScheme(), request.getServerName(), request.getServerPort());
+        String host = String.format("%s://%s:%d",
+                    request.getScheme(), request.getServerName(), request.getServerPort());
 
         return host + props.getUrl() + (seq % 10L);
     }
@@ -121,7 +120,7 @@ public class FileInfoService {
     public String thumbPath(long seq) {
         String dir = uploadDir(seq);
 
-        String thumbDir = dir + "/thumbs";
+        String thumbDir= dir + "/thumbs";
         File _thumbDir = new File(thumbDir);
         if (!_thumbDir.exists()) {
             _thumbDir.mkdir();

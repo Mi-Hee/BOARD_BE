@@ -10,7 +10,6 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
-
 import java.io.FileInputStream;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
@@ -35,9 +34,9 @@ public class FileUploadTest {
     @DisplayName("[통합테스트] 파일 업로드 API")
     void uploadTest() throws Exception {
         mockMvc.perform(multipart("/api/v1/file")
-                        .file(file)
-                        .param("gid", "testgid")
-                        .param("location", "testLocation"))
+                .file(file)
+                .param("gid", "testgid")
+                .param("location", "testLocation"))
                 .andDo(print());
 
 

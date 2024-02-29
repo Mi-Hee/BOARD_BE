@@ -10,10 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 @EnableConfigurationProperties(FileProperties.class)
 public class FileConfig implements WebMvcConfigurer {
-
     private final FileProperties props;
 
-    // Ctrl + o : 메서드 재정의
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(props.getUrl() + "**")

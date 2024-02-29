@@ -48,6 +48,8 @@ public class CommonAdvice {
             message = messageSource.getMessage("Fail.login.credential", null, null);
         }
 
+
+
         e.printStackTrace();
 
         JSONData data = new JSONData();

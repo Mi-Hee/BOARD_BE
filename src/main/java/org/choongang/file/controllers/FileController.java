@@ -9,7 +9,6 @@ import org.choongang.file.service.FileInfoService;
 import org.choongang.file.service.FileUploadService;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -17,7 +16,6 @@ import java.util.List;
 @RequestMapping("/api/v1/file")
 @RequiredArgsConstructor
 public class FileController {
-
     private final FileUploadService uploadService;
     private final FileInfoService infoService;
     private final FileDeleteService deleteService;
@@ -25,13 +23,13 @@ public class FileController {
 
     // 파일 업로드
     @PostMapping
-    public JSONData upload(@RequestParam("file") MultipartFile[] file, RequestFileUpload form) {
-        form.setFile(file);
+    public JSONData upload(RequestFileUpload form) {
+
         List<FileInfo> items = uploadService.upload(form);
 
         return new JSONData(items);
     }
-    
+
     // 파일 삭제
     @DeleteMapping
     public void delete(RequestFileDelete form) {
@@ -41,7 +39,6 @@ public class FileController {
 
         if (seq != null) {
             deleteService.delete(seq);
-
         } else if (StringUtils.hasText(gid)) {
             deleteService.delete(gid, location);
         }
@@ -63,6 +60,7 @@ public class FileController {
     public JSONData list(@RequestParam("gid") String gid,
                          @RequestParam(name = "location", required = false) String location,
                          @RequestParam(name = "mode", required = false) String mode) {
+
         List<FileInfo> items = StringUtils.hasText(mode) ? infoService.getList(gid, location, mode) : infoService.getListDone(gid, location);
 
         return new JSONData(items);

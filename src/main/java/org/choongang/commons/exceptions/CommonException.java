@@ -7,6 +7,7 @@ public class CommonException extends RuntimeException {
 
     private HttpStatus status;
     private Errors errors;
+
     private boolean messageCode;
 
     public CommonException(String message) {

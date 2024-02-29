@@ -22,8 +22,8 @@ public class FileDeleteService {
     public void delete(Long seq) {
         FileInfo item = infoService.get(seq);
         String createdBy = item.getCreatedBy();
-        if (!memberUtil.isAdmin() && StringUtils.hasText(createdBy) && (!memberUtil.isLogin() || !createdBy.equals(memberUtil.getMember().getEmail()))) {
-
+        if (!memberUtil.isAdmin() && StringUtils.hasText(createdBy)
+                && (!memberUtil.isLogin() || !createdBy.equals(memberUtil.getMember().getEmail()))) {
             throw new UnAuthorizedException();
         }
 
@@ -40,7 +40,6 @@ public class FileDeleteService {
 
         repository.delete(item);
         repository.flush();
-
     }
 
     public void delete(String gid, String location) {
