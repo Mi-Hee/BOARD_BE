@@ -11,6 +11,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
 
+import java.io.FileInputStream;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -25,8 +27,8 @@ public class FileUploadTest {
     private MockMultipartFile file;
 
     @BeforeEach
-    void init() {
-        file = new MockMultipartFile("file", "test.png", "image/png", new byte[] {0, 1, 2, 3, 4});
+    void init() throws Exception {
+        file = new MockMultipartFile("file", "test.png", "image/png", new FileInputStream("2.png"));
     }
 
     @Test
@@ -37,5 +39,7 @@ public class FileUploadTest {
                         .param("gid", "testgid")
                         .param("location", "testLocation"))
                 .andDo(print());
+
+
     }
 }
