@@ -37,6 +37,11 @@ public class BoardConfigSaveService {
         board.setCategory(form.getCategory());
 
         board.setWriteAuthority(Authority.valueOf(form.getWriteAuthority()));
+        board.setListAuthority(Authority.valueOf(form.getListAuthority()));
+        board.setViewAuthority(Authority.valueOf(form.getViewAuthority()));
+        board.setCommentAuthority(Authority.valueOf(form.getCommentAuthority()));
+
+        boardRepository.saveAndFlush(board);
 
     }
 }

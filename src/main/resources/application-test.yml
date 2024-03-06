@@ -26,6 +26,15 @@ logging:
           descriptor:
             sql: trace
 
+# JSON WebToken 설정
+jwt:
+  header: Authorization
+  secret: ${jwt.secret}
+  accessTokenValidityInSeconds: 3600 # 60 min
+
+cors:
+  origin: ${cors.origin}
+
 file:
   upload:
     path: C:/uploads/
