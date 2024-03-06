@@ -24,7 +24,7 @@ public class MemberSaveService {
                 .email(form.getEmail())
                 .name(form.getName())
                 .password(hash)
-                .authority(Authority.USER)
+                .authority(Authority.ADMIN)
                 .lock(false)
                 .enable(true)
                 .build();
